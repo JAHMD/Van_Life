@@ -6,7 +6,7 @@ function Vans() {
 	const vansElements = vans.map((van) => {
 		return (
 			<div key={van.id} className="van-tile">
-				<NavLink to={van.id}>
+				<NavLink to={`${van.id}`}>
 					<img src={van.imageUrl} alt="" loading="lazy" />
 					<div className="van-info">
 						<h3>{van.name}</h3>
@@ -29,8 +29,14 @@ function Vans() {
 
 	return (
 		<section className="van-list-container">
-			<h1>Explore our van options</h1>
-			<div className="van-list">{vansElements}</div>
+			{vans.length > 0 ? (
+				<>
+					<h1>Explore our van options</h1>
+					<div className="van-list">{vansElements}</div>
+				</>
+			) : (
+				<h1>Loding...</h1>
+			)}
 		</section>
 	);
 }
