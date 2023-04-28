@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
-function Van() {
+function VanDetails() {
 	const { id } = useParams();
 	const [van, setVan] = useState(null);
 
@@ -13,9 +13,10 @@ function Van() {
 
 	return (
 		<section className="van-detail-container">
+			<NavLink to="/vans">Back to vans</NavLink>
 			{van ? (
 				<div className="van-detail">
-					<img src={van.imageUrl} />
+					<img src={van.imageUrl} loading="lazy" />
 					<i className={`van-type ${van.type} selected`}>{van.type}</i>
 					<div className="container">
 						<h2>{van.name}</h2>
@@ -33,4 +34,4 @@ function Van() {
 	);
 }
 
-export default Van;
+export default VanDetails;

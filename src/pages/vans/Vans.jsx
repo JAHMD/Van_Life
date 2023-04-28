@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Vans() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [vans, setVans] = useState([]);
 	const vansElements = vans.map((van) => {
 		return (
@@ -14,17 +15,21 @@ function Vans() {
 							${van.price}
 							<span>/day</span>
 						</p>
+						<span className={`van-type ${van.type} selected`}>{van.type}</span>
 					</div>
-					<i className={`van-type ${van.type} selected`}>{van.type}</i>
 				</NavLink>
 			</div>
 		);
 	});
 
 	useEffect(() => {
+		setIsLoading(true);
 		fetch("/api/vans")
 			.then((res) => res.json())
-			.then(({ vans }) => setVans(vans));
+			.then(({ vans }) => {
+				setVans(vans);
+				setIsLoading(false);
+			});
 	}, []);
 
 	return (
@@ -34,8 +39,10 @@ function Vans() {
 					<h1>Explore our van options</h1>
 					<div className="van-list">{vansElements}</div>
 				</>
+			) : isLoading ? (
+				<h2>Loading...</h2>
 			) : (
-				<h1>Loding...</h1>
+				<h2>No Vans to dispaly</h2>
 			)}
 		</section>
 	);

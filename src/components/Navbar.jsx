@@ -7,9 +7,11 @@ function Navbar() {
 				#VANLIFE
 			</NavLink>
 			<nav>
-				<NavLink to="host">Host</NavLink>
 				<NavLink to="about">About</NavLink>
-				<NavLink to="vans">Vans</NavLink>
+				<NavLink to="vans" end>
+					Vans
+				</NavLink>
+				<NavLink to="host">Host</NavLink>
 			</nav>
 		</header>
 	);

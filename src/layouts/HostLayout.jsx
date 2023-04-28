@@ -5,10 +5,15 @@ function HostLayout() {
 		<section>
 			<ul className="host-nav">
 				<li>
-					<NavLink to="/host">Dashboard</NavLink>
+					<NavLink to="." end>
+						Dashboard
+					</NavLink>
 				</li>
 				<li>
 					<NavLink to="income">Income</NavLink>
+				</li>
+				<li>
+					<NavLink to="hvans">Vans</NavLink>
 				</li>
 				<li>
 					<NavLink to="reviews">Reviews</NavLink>

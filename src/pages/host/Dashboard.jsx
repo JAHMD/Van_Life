@@ -1,8 +1,8 @@
 function Dashboard() {
 	return (
-		<section className="host-container">
+		<div className="host-container">
 			<h1>Dashboard</h1>
-		</section>
+		</div>
 	);
 }
 
