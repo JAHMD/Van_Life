@@ -1,51 +1,60 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useMemo } from "react";
+import { useLoaderData, useSearchParams } from "react-router-dom";
+import FilterButtons from "../../components/FilterButtons";
+import { getVans } from "../../utils/api";
+import VanComp from "./VanComp";
 
 function Vans() {
-	const [isLoading, setIsLoading] = useState(false);
-	const [vans, setVans] = useState([]);
-	const vansElements = vans.map((van) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const typeFilter = searchParams.get("type");
+	const vans = useLoaderData();
+
+	const displayedVans = useMemo(() => {
+		return typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+	}, [typeFilter, vans]);
+
+	const vansElements = displayedVans.map((van) => {
 		return (
-			<div key={van.id} className="van-tile">
-				<NavLink to={`${van.id}`}>
-					<img src={van.imageUrl} alt="" loading="lazy" />
-					<div className="van-info">
-						<h3>{van.name}</h3>
-						<p>
-							${van.price}
-							<span>/day</span>
-						</p>
-						<span className={`van-type ${van.type} selected`}>{van.type}</span>
-					</div>
-				</NavLink>
-			</div>
+			<VanComp
+				key={van.id}
+				van={van}
+				searchParams={searchParams}
+				typeFilter={typeFilter}
+			/>
 		);
 	});
 
-	useEffect(() => {
-		setIsLoading(true);
-		fetch("/api/vans")
-			.then((res) => res.json())
-			.then(({ vans }) => {
-				setVans(vans);
-				setIsLoading(false);
-			});
-	}, []);
+	function handleFilterChange(key, value) {
+		setSearchParams((prevParams) => {
+			if (value === null) {
+				prevParams.delete(key);
+			} else {
+				prevParams.set(key, value);
+			}
+			return prevParams;
+		});
+	}
 
 	return (
 		<section className="van-list-container">
-			{vans.length > 0 ? (
+			{vans?.length > 0 ? (
 				<>
 					<h1>Explore our van options</h1>
+					<FilterButtons
+						filterFunc={handleFilterChange}
+						typeFilter={typeFilter}
+					/>
 					<div className="van-list">{vansElements}</div>
 				</>
-			) : isLoading ? (
-				<h2>Loading...</h2>
 			) : (
 				<h2>No Vans to dispaly</h2>
 			)}
 		</section>
 	);
+}
+
+export function vansLoader() {
+	return getVans("/api/vans");
 }
 
 export default Vans;

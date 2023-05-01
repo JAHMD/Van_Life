@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 function VanDetails() {
+	const location = useLocation();
+	const search = `?${location.state?.search}` || "";
+	const vansType = location.state?.type || "all";
 	const { id } = useParams();
 	const [van, setVan] = useState(null);
 
@@ -13,7 +16,9 @@ function VanDetails() {
 
 	return (
 		<section className="van-detail-container">
-			<NavLink to="/vans">Back to vans</NavLink>
+			<Link to={`..${search}`} state="" className="back-button">
+				&larr;<span>Back to {vansType} vans</span>
+			</Link>
 			{van ? (
 				<div className="van-detail">
 					<img src={van.imageUrl} loading="lazy" />

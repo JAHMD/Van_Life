@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 
 function HostVanDetails() {
 	const { id } = useParams();
@@ -13,9 +13,9 @@ function HostVanDetails() {
 
 	return (
 		<div style={{ marginInline: "20px" }}>
-			<NavLink to=".." className="back">
-				<span>&larr;</span> Back to all vans
-			</NavLink>
+			<Link to=".." className="back-button">
+				&larr;<span>Back to all vans</span>
+			</Link>
 			{van ? (
 				<div className="hos-van-details-container">
 					<div className="top">
