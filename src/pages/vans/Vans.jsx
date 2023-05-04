@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import FilterButtons from "../../components/FilterButtons";
 import { getVans } from "../../utils/api";
+import { requireAuth } from "../../utils/requireAuth";
 import VanComp from "./VanComp";
 
 function Vans() {
@@ -53,8 +54,9 @@ function Vans() {
 	);
 }
 
-export function vansLoader() {
-	return getVans("/api/vans");
+export async function vansLoader() {
+	// await requireAuth();
+	return getVans();
 }
 
 export default Vans;

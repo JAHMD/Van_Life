@@ -4,6 +4,7 @@ function Error() {
 	const error = useRouteError();
 	return (
 		<section
+			className="error"
 			style={{
 				padding: "1rem",
 			}}
@@ -12,7 +13,9 @@ function Error() {
 			<pre>
 				{error.status} - {error.statusText}
 			</pre>
-			<NavLink to="/">Back to home page</NavLink>
+			<NavLink to="/" className="link-button">
+				Back to home page
+			</NavLink>
 		</section>
 	);
 }
