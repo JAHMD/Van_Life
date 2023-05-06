@@ -4,7 +4,7 @@ import { requireAuth } from "../utils/requireAuth";
 function ProtectedRoutes() {
 	const auth = requireAuth();
 
-	return auth ? <Outlet /> : <Navigate to="/login" />;
+	return auth ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 export default ProtectedRoutes;

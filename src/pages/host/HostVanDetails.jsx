@@ -2,6 +2,12 @@ import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../utils/api";
 import { requireAuth } from "../../utils/requireAuth";
 
+export async function hostVansLoader({ params }) {
+	const { id } = params;
+	await requireAuth();
+	return getHostVans(id);
+}
+
 function HostVanDetails() {
 	const van = useLoaderData();
 
@@ -40,12 +46,6 @@ function HostVanDetails() {
 			</div>
 		</div>
 	);
-}
-
-export async function hostVansLoader({ params }) {
-	const { id } = params;
-	await requireAuth();
-	return getHostVans(id);
 }
 
 export default HostVanDetails;

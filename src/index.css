@@ -584,6 +584,12 @@ span[class*="van-type-"] {
 	gap: 2rem;
 }
 
+.login-container .link-button {
+	background-color: #161616;
+	color: white;
+	border-radius: 10px;
+}
+
 .login-container h1 {
 	font-size: 40px;
 }
@@ -625,6 +631,10 @@ span[class*="van-type-"] {
 	margin-top: 22px;
 	color: white;
 	font-family: "Inter", sans-serif;
+}
+.login-form > button:disabled {
+	cursor: not-allowed;
+	opacity: 0.8;
 }
 
 /* error */

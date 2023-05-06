@@ -2,8 +2,11 @@ import { useMemo } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import FilterButtons from "../../components/FilterButtons";
 import { getVans } from "../../utils/api";
-import { requireAuth } from "../../utils/requireAuth";
 import VanComp from "./VanComp";
+
+export async function vansLoader() {
+	return getVans();
+}
 
 function Vans() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -52,11 +55,6 @@ function Vans() {
 			)}
 		</section>
 	);
-}
-
-export async function vansLoader() {
-	// await requireAuth();
-	return getVans();
 }
 
 export default Vans;
