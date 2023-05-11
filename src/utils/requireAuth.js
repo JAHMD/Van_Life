@@ -1,10 +1,13 @@
-import Cookies from "js-cookie";
 import { redirect } from "react-router-dom";
+import { auth } from "./api";
 
-export async function requireAuth() {
-	const user = Cookies.get("user");
-	if (user) {
-		return null;
+export async function requireAuth(request) {
+	const hasUser = auth?.currentUser;
+	const pathname = new URL(request.url).pathname;
+	if (!hasUser) {
+		return redirect(
+			`/login?message=You should be logged in!&redirectURL=${pathname}`
+		);
 	}
-	return redirect("/login?message=You should be logged in!");
+	return null;
 }

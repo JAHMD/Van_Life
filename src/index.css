@@ -109,10 +109,16 @@ header nav a:is(.active) {
 section {
 	min-height: calc(100vh - 149px);
 	padding-block-end: 20px;
+	display: flex;
+	flex-direction: column;
 }
 
 img {
 	max-width: 100%;
+}
+
+.red {
+	color: red;
 }
 
 .container {
@@ -123,6 +129,7 @@ img {
 	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
+	flex: 1;
 }
 .bottom img {
 	width: 100%;
@@ -257,6 +264,8 @@ img {
 /*** VAN PAGES ***/
 .van-list-container {
 	padding-inline: 23px;
+	display: flex;
+	flex-direction: column;
 }
 
 .van-list-filter-buttons {
@@ -633,8 +642,8 @@ span[class*="van-type-"] {
 	font-family: "Inter", sans-serif;
 }
 .login-form > button:disabled {
+	background-color: #aaaaaa;
 	cursor: not-allowed;
-	opacity: 0.8;
 }
 
 /* error */
@@ -644,6 +653,220 @@ span[class*="van-type-"] {
 	background-color: #161616;
 	color: white;
 }
+
+.loadding {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+}
+
+.loader {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: radial-gradient(farthest-side, #252525 94%, #0000) top/8px 8px
+			no-repeat,
+		conic-gradient(#0000 30%, #252525);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+	mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+	animation: spin 0.5s infinite linear;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* host routes */
+
+.host-dashboard-earnings {
+	background-color: #ffead0;
+	padding: 37px 26px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.host-dashboard-earnings > .info > h1 {
+	font-size: 36px;
+	color: #161616;
+	margin: 0;
+}
+
+.host-dashboard-earnings > .info > p {
+	color: #4d4d4d;
+}
+
+.host-dashboard-earnings > .info > p > span {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.host-dashboard-earnings > .info > h2 {
+	margin: 0;
+	font-size: 38px;
+	color: #161616;
+	font-weight: 900;
+}
+
+.host-dashboard-reviews {
+	background-color: #ffddb2;
+	padding: 25px 26px;
+	display: flex;
+	align-items: center;
+}
+
+.host-dashboard-reviews > h2 {
+	margin: 0;
+}
+
+.host-dashboard-reviews .star {
+	color: #ff8c38;
+	margin-left: 15px;
+	font-size: 25px;
+}
+
+.host-dashboard-reviews p {
+	margin-left: 5px;
+	font-size: 20px;
+	color: #4d4d4d;
+	margin-right: auto;
+}
+
+.host-dashboard-reviews p > span {
+	font-weight: bold;
+	color: #161616;
+}
+
+.host-income {
+	padding-inline: 26px;
+	color: #161616;
+}
+
+.host-income > p {
+	color: #4d4d4d;
+}
+
+.host-income > p span {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.host-income > h2 {
+	font-size: 38px;
+	color: #161616;
+	font-weight: 900;
+}
+
+img.graph {
+	width: 100%;
+	max-width: 500px;
+}
+.host-income .info-header {
+	margin-block: 20px;
+}
+
+.host-income .info-header > p {
+	color: #4d4d4d;
+}
+
+.host-income .info-header > p span {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.host-income .info-header > h3 {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.host-income .transaction {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #ffead0;
+	margin-bottom: 31px;
+	padding: 35px 29px;
+	border-radius: 8px;
+}
+.host-income .transaction > h3 {
+	font-size: 36px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.host-income .transaction > p {
+	font-weight: 500;
+	font-size: 20px;
+	color: #4d4d4d;
+}
+
+.host-reviews {
+	padding-inline: 26px;
+	color: #161616;
+}
+
+.host-reviews .top-text {
+	display: flex;
+	align-items: center;
+	margin-bottom: 32px;
+}
+
+.host-reviews .top-text > h2 {
+	font-weight: 700;
+	font-size: 32px;
+	margin: 0;
+	margin-right: 20px;
+}
+
+.host-reviews .top-text > p {
+	margin: 0;
+	color: #4d4d4d;
+}
+
+.host-reviews .top-text > p span {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.host-reviews > img {
+	margin-bottom: 36px;
+}
+
+.host-reviews .review {
+	margin-block: 25px;
+}
+
+.host-reviews .review .info {
+	display: flex;
+}
+
+.host-reviews .review .name {
+	color: #161616;
+	margin-right: 10px;
+	font-weight: 600;
+}
+
+.host-reviews .review .date {
+	color: #8c8c8c;
+}
+
+.host-reviews hr {
+	background-color: #c7c7c7;
+	height: 1px;
+	border: 0;
+}
+
+.host-reviews .review-star {
+	color: #ff8c38;
+	margin-right: 5px;
+}
+
 /* footer */
 footer {
 	padding: 1.5rem;

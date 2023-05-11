@@ -23,7 +23,9 @@ import Income from "./pages/host/Income.jsx";
 import Photos from "./pages/host/Photos.jsx";
 import Pricing from "./pages/host/Pricing.jsx";
 import Reviews from "./pages/host/Reviews.jsx";
-import Login, { loginLoader } from "./pages/login/Login.jsx";
+import Login, { loginAction, loginLoader } from "./pages/user/Login.jsx";
+import SginUp, { signUpAction } from "./pages/user/SignUp.jsx";
+import User from "./pages/user/User.jsx";
 import VanDetails, { vanDetailsLoader } from "./pages/vans/VanDetails.jsx";
 import Vans, { vansLoader } from "./pages/vans/Vans.jsx";
 import { requireAuth } from "./utils/requireAuth.js";
@@ -43,12 +45,12 @@ const router = createBrowserRouter(
 				<Route
 					index
 					element={<Dashboard />}
-					loader={async () => await requireAuth()}
+					loader={async ({ request }) => await requireAuth(request)}
 				/>
 				<Route
 					path="income"
 					element={<Income />}
-					loader={async () => await requireAuth()}
+					loader={async ({ request }) => await requireAuth(request)}
 				/>
 				<Route path="hvans">
 					<Route index element={<HostVans />} loader={hostLoader} />
@@ -60,28 +62,35 @@ const router = createBrowserRouter(
 						<Route
 							index
 							element={<Details />}
-							loader={async () => await requireAuth()}
+							loader={async ({ request }) => await requireAuth(request)}
 						/>
 						<Route
 							path="pricing"
 							element={<Pricing />}
-							loader={async () => await requireAuth()}
+							loader={async ({ request }) => await requireAuth(request)}
 						/>
 						<Route
 							path="photos"
 							element={<Photos />}
-							loader={async () => await requireAuth()}
+							loader={async ({ request }) => await requireAuth(request)}
 						/>
 					</Route>
 				</Route>
 				<Route
 					path="reviews"
 					element={<Reviews />}
-					loader={async () => await requireAuth()}
+					loader={async ({ request }) => await requireAuth(request)}
 				/>
 			</Route>
 
-			<Route path="login" element={<Login />} loader={loginLoader} />
+			<Route path="user" element={<User />} />
+			<Route
+				path="login"
+				element={<Login />}
+				loader={loginLoader}
+				action={loginAction}
+			/>
+			<Route path="signup" element={<SginUp />} action={signUpAction} />
 			<Route path="*" element={<NotFound />} />
 		</Route>
 	)

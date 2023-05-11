@@ -12,7 +12,7 @@ function Navbar() {
 				<NavLink to="about">About</NavLink>
 				<NavLink to="vans">Vans</NavLink>
 				<NavLink to="host">Host</NavLink>
-				<NavLink to="login">
+				<NavLink to="user">
 					<img src={userIcon} alt="user icon" height={20} />
 				</NavLink>
 			</nav>
