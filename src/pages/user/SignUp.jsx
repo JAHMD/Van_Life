@@ -1,7 +1,9 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useEffect, useState } from "react";
 import {
 	Form,
 	NavLink,
+	Navigate,
 	redirect,
 	useActionData,
 	useNavigation,
@@ -24,13 +26,17 @@ export async function signUpAction({ request }) {
 }
 
 function SginUp() {
-	const user = auth?.currentUser;
 	const errorMessage = useActionData();
 	const { state } = useNavigation();
 	const isSubmitting = state === "submitting";
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		setUser(auth?.currentUser);
+	}, []);
 
 	if (user) {
-		return redirect("/user", { replace: true });
+		return <Navigate to="/user" />;
 	}
 
 	return (

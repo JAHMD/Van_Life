@@ -1,7 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useEffect, useState } from "react";
 import {
 	Form,
 	NavLink,
+	Navigate,
 	redirect,
 	useActionData,
 	useLoaderData,
@@ -9,7 +11,7 @@ import {
 } from "react-router-dom";
 import { auth } from "../../utils/api";
 
-export function loginLoader({ request }) {
+export async function loginLoader({ request }) {
 	return new URL(request.url).searchParams.get("message");
 }
 
@@ -33,10 +35,14 @@ function Login() {
 	const errorMessage = useActionData();
 	const { state } = useNavigation();
 	const isSubmitting = state === "submitting";
-	const user = auth?.currentUser;
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		setUser(auth?.currentUser);
+	}, []);
 
 	if (user) {
-		return redirect("/user", { replace: true });
+		return <Navigate to="/user" />;
 	}
 
 	return (

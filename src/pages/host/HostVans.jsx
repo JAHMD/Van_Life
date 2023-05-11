@@ -1,12 +1,14 @@
 import { Suspense } from "react";
 import { Await, NavLink, defer, useLoaderData } from "react-router-dom";
 import { Loader } from "../../components/Loader";
-import { auth, getHostVans } from "../../utils/api";
+import { getHostVans } from "../../utils/api";
 import { requireAuth } from "../../utils/requireAuth";
 
 export async function hostLoader({ request }) {
 	await requireAuth(request);
-	const user = auth.currentUser;
+	/**TODO:
+	 * get the loged user data not a static data;
+	 */
 	const { vans } = await getHostVans("KiDFNUy8XcMw1IAmfj5VTD5S4Nv1");
 	return defer({ vans });
 }

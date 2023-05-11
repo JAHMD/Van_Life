@@ -7,7 +7,7 @@ import {
 	useLocation,
 } from "react-router-dom";
 import { Loader } from "../../components/Loader";
-import { getVan } from "../../utils/api";
+import { auth, getVan, rentVan } from "../../utils/api";
 
 function VanDetails() {
 	const location = useLocation();
@@ -35,7 +35,14 @@ function VanDetails() {
 										<span>${van.price}</span>/day
 									</p>
 									<p>{van.description}</p>
-									<button className="link-button">Rent this van</button>
+									<button
+										className="link-button"
+										onClick={async () =>
+											await rentVan({ userId: auth.currentUser.uid, van })
+										}
+									>
+										Rent this van
+									</button>
 								</div>
 							</div>
 						);
