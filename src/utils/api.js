@@ -7,10 +7,8 @@ import {
 	getDocs,
 	getFirestore,
 	query,
-	updateDoc,
 	where,
 } from "firebase/firestore";
-import { redirect } from "react-router-dom";
 
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_API_KEY,
@@ -46,7 +44,9 @@ export async function getVan(id) {
 export async function getHostVans(id) {
 	const docRef = doc(db, "users", id);
 	const vansSnap = await getDoc(docRef);
-	return { ...vansSnap.data(), id: vansSnap.id };
+	return vansSnap.exists()
+		? { ...vansSnap.data(), id: vansSnap.id }
+		: { vans: [] };
 }
 // export async function getHostVans() {
 // 	const q = query(vansCollection, where("hostId", "==", "123"));
@@ -54,19 +54,3 @@ export async function getHostVans(id) {
 // 	const vansArr = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 // 	return vansArr;
 // }
-
-export async function rentVan({ userId, van }) {
-	console.log("from rent van", userId);
-	const docRef = doc(db, "users", userId);
-	const snap = await getDoc(docRef);
-	const hostedVansList = await snap.data().vans;
-	console.log(hostedVansList);
-	for (let vanItem of hostedVansList) {
-		if (van.id === vanItem.id) {
-			return redirect("/vans");
-		}
-	}
-	const updatedVansList = [...hostedVansList, van];
-	await updateDoc(docRef, { vans: updatedVansList });
-	return redirect("/vans");
-}
