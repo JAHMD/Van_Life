@@ -15,14 +15,16 @@ import Modal from "../../components/Modal";
 import { auth, db, getVan } from "../../utils/api";
 
 function VanDetails() {
+	const navigate = useNavigate();
 	const location = useLocation();
 	const search = `?${location.state?.search}` || "";
 	const vansType = location.state?.type || "all";
 	const data = useLoaderData();
-	const navigate = useNavigate();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	async function rentVan({ van }) {
+		setIsSubmitting(true);
 		const userId = auth?.currentUser?.uid;
 		if (userId === undefined) {
 			return navigate("/login?message=You should be logged in!");
@@ -30,9 +32,11 @@ function VanDetails() {
 		const docRef = doc(db, "users", userId);
 		const snap = await getDoc(docRef);
 		if (!snap.exists()) {
-			return await createHostDoc({ userId, van });
+			await createHostDoc({ userId, van });
+			return setIsSubmitting(false);
 		}
-		return await updateHostDoc({ docRef, snap, van });
+		await updateHostDoc({ docRef, snap, van });
+		return setIsSubmitting(false);
 	}
 
 	async function createHostDoc({ userId, van }) {
@@ -97,6 +101,7 @@ function VanDetails() {
 										<button
 											className="link-button"
 											onClick={async () => await rentVan({ van })}
+											disabled={isSubmitting}
 										>
 											Rent this van
 										</button>

@@ -257,6 +257,7 @@ img {
 .btns-container button {
 	background-color: transparent;
 	border: 1px solid #161616;
+	color: #161616;
 }
 
 /*** HOME PAGE ***/
@@ -739,7 +740,7 @@ span[class*="van-type-"] {
 	color: white;
 	font-family: "Inter", sans-serif;
 }
-.login-form > button:disabled {
+button:disabled {
 	background-color: #aaaaaa;
 	cursor: not-allowed;
 }
